@@ -1,17 +1,24 @@
 import numpy as np
 
-n = int (input ("Introduce el tamaño del tablero: 3x3, 4x4..."))
+n = int (input ("Introduce el número de filas que tendrá el tablero: "))
 
 def determinar_ganador(tablero):
 
+    counter = 0
+    diag = []
+
     for row in tablero:
-        if all(cell == 1 for cell in row) or all(cell == 2 for cell in row):
+        diag.append(tablero[counter][-(counter+1)])
+        if all(cell == 1 or cell == 2 for cell in row) or all (cell == 1 or cell == 2 for cell in diag):
             return True
+        counter += 1
 
     for column in range(n):
         column = tablero[:, column]
-        if all (cell == 1 for cell in column) or all(cell == 2 for cell in column):
+        if all (cell == 1 or cell == 2 for cell in column):
             return True
+        
+    
 
 tablero = np.zeros (shape=(n,n))
 print (tablero)

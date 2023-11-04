@@ -3,20 +3,43 @@ import numpy as np
 def user_turn(board):
     row_position = int(input("Enter the row number: "))
     column_position = int(input("Enter the column number: "))
-    board[row_position, column_position] = 1
+    board[row_position, column_position] = 1     
 
 def cpu_turn(board, n):
-    random_row = np.random.randint(0, n)
-    random_column = np.random.randint(0, n)
-    
-    while board[random_row, random_column] != 0:
-        random_row = np.random.randint(0, n)
-        random_column = np.random.randint(0, n)
+
+    for row in range(n):
+        if np.count_nonzero(board[row] == 1) == 2 and 0 in board[row]:
+            index = np.where(board[row] == 0)[0][0]
+            board[row, index] = 2
+            return
+
+    fila_aleatoria = np.random.randint(0, n)
+    columna_aleatoria = np.random.randint(0, n)
+        
+    while board[fila_aleatoria, columna_aleatoria] != 0:
+        fila_aleatoria = np.random.randint(0, n)
+        columna_aleatoria = np.random.randint(0, n)
+
         if 0 not in board:
             print("Draw")
             break
+        
+    board[fila_aleatoria, columna_aleatoria] = 2
+
+# def cpu_turn(board, n):
+
+    
+#     random_row = np.random.randint(0, n)
+#     random_column = np.random.randint(0, n)
+    
+#     while board[random_row, random_column] != 0:
+#         random_row = np.random.randint(0, n)
+#         random_column = np.random.randint(0, n)
+#         if 0 not in board:
+#             print("Draw")
+#             break
             
-    board[random_row, random_column] = 2
+    # board[random_row, random_column] = 2
 
 def row_winner(board):
     for row in board:

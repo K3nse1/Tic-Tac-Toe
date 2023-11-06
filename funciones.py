@@ -9,26 +9,26 @@ def user_turn(board):
 def cpu_turn(board, n):
     
     for row in range(n):
-        if np.count_nonzero(board[row] == 1) == n-1 or np.count_nonzero(board[row] == 2) == n-1 and 0 in board[row]:
+        if (np.count_nonzero(board[row] == 2) == n-1 or np.count_nonzero(board[row] == 1) == n-1) and 0 in board[row]:
             index = np.where(board[row] == 0)[0][0]
             board[row, index] = 2
             return
         
         column_values = board[:, row]
-
-        if np.count_nonzero(column_values == 1) == n-1 or np.count_nonzero(column_values == 2) == n-1 and 0 in column_values:
+    
+        if (np.count_nonzero(column_values == 2) == n-1 or np.count_nonzero(column_values == 1) == n-1) and 0 in column_values:
             column_values[column_values == 0] = 2
             board[:,row] = column_values
             return
 
-        if np.count_nonzero(np.diag(board) == 1) == n-1 or np.count_nonzero(np.diag(board) == 2) == n-1 and 0 in np.diag(board):
+        if (np.count_nonzero(np.diag(board) == 2) == n-1 or np.count_nonzero(np.diag(board) == 1) == n-1) and 0 in np.diag(board):
             main_diag = np.array([2 if value == 0 else value for value in np.diag(board)])
             np.fill_diagonal(board,main_diag)
             return 
 
         anti_diagonal = np.diag(np.fliplr(board))
 
-        if np.count_nonzero(anti_diagonal == 1) == n-1 or np.count_nonzero(anti_diagonal == 2) == n-1 and 0 in anti_diagonal:
+        if (np.count_nonzero(anti_diagonal == 2) == n-1 or np.count_nonzero(anti_diagonal == 1) == n-1) and 0 in anti_diagonal:
             anti_diagonal = np.array([2 if value == 0 else value for value in anti_diagonal])
             np.fill_diagonal(np.fliplr(board),anti_diagonal)
             return

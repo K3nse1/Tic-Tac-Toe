@@ -10,7 +10,10 @@ This function allows the user to make a move in the game. The user is prompted t
 
 ### `cpu_turn(board, n)`
 
-The `cpu_turn` function is responsible for the CPU's move. It randomly selects an empty cell on the game board and places the CPU's symbol (2) there. If all cells are occupied, it declares a draw.
+The `cpu_turn` function is responsible for the CPU's move. It aims to play optimally and considers potential winning moves for both the user and the CPU. It follows these steps:
+- Checks if the CPU can make a winning move in a row, column, or diagonal. If so, it makes that move.
+- If the user is about to win (with one move left to victory), it blocks the user's winning move.
+- If none of the above conditions are met, the CPU places its symbol (2) in an empty cell on the game board randomly. If all cells are occupied, it declares a draw.
 
 ### `row_winner(board)`
 
